@@ -1,0 +1,73 @@
+package com.company;
+
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+
+class matrix {
+    int size = 10;
+
+    public void readdata(int table[][], int size) {
+        int i, j;
+        System.out.println("10x10 table creation");
+        for (i = 0; i < size; i++) {
+            for (j = 0; j < size; j++) {
+                if (i == j)
+                    table[i][j] = 1;
+                else
+                    table[i][j] = 0;
+                System.out.print(table[i][j] + " ");
+            }
+            System.out.println();
+        }
+    }
+
+    public void savefile(int table[][], int size)
+            throws IOException {
+        int i, j;
+        System.out.println();
+        System.out.println("10x10 table file saving");
+        FileWriter fw = new FileWriter("table.txt");
+        for (i = 0; i < size; i++) {
+            for (j = 0; j < size; j++) {
+                fw.write((char) (table[i][j]));
+                System.out.print(table[i][j] + " ");
+            }
+            System.out.println();
+        }
+        fw.close();
+    }
+
+    public void readfile(int table[][], int size)
+            throws IOException {
+        int i, j;
+        System.out.println();
+        System.out.println("10x10 table file reading");
+        FileReader fr = new FileReader("table.txt");
+        BufferedReader br = new BufferedReader(fr);
+        for (i = 0; i < size; i++) {
+            for (j = 0; j < size; j++) {
+                table[i][j] = (int) br.read();
+                System.out.print(table[i][j] + " ");
+            }
+            System.out.println();
+        }
+        fr.close();
+    }
+}
+
+public class Main {
+
+    public static void main(String[] args)
+            throws IOException {
+        int size = 10;
+        int tab[][] = new int[size][size];
+        int tab1[][] = new int[size][size];
+        matrix matrix1 = new matrix();
+        matrix1.readdata(tab, size);
+        matrix1.savefile(tab, size);
+        matrix1.readfile(tab, size);
+
+    }
+}
